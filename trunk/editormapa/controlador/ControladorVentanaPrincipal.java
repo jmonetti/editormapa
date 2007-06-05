@@ -13,7 +13,6 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 
-import vista.Fondo;
 
 public class ControladorVentanaPrincipal implements WindowListener{
 

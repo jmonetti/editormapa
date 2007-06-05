@@ -40,13 +40,14 @@ public class PanelRegion extends JInternalFrame implements Observer{
 		//Conecto con el modelo
 		
 		//Defino el tamaño de la pantalla
-		Dimension tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		//Establezco el tamaño y las coordenadas
-		this.setBounds(tamañoPantalla.width/3, 2 * tamañoPantalla.height / 3, new Integer(tamañoPantalla.width / 3).intValue(), tamañoPantalla.height / 3 - 75);
+		this.setBounds(tamanoPantalla.width/3, 2 * tamanoPantalla.height / 3, new Integer(tamanoPantalla.width / 3).intValue(), tamanoPantalla.height / 3 - 75);
 	    this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
 		//Creo el panel
 		panel = new JPanel();
-		panel.setBounds(tamañoPantalla.width/3, 2 * tamañoPantalla.height / 3, tamañoPantalla.width / 3, tamañoPantalla.height / 3 - 75);
+		panel.setBounds(tamanoPantalla.width/3, 2 * tamanoPantalla.height / 3, tamanoPantalla.width / 3, tamanoPantalla.height / 3 - 75);
+		this.setLocation(0, (int)(tamanoPantalla.getWidth() - panel.getWidth())-100);
 		//Creo las etiquetas del panel y las agrego
 		this.crearEtiquetas();
 		this.PonerEtiquetasEnBlanco();
@@ -63,10 +64,8 @@ public class PanelRegion extends JInternalFrame implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		if (modelo!=null){
 			this.etiquetas[0].setText(" Region: " + (modelo.getNombre())+" ");
-			//this.etiquetas[1].setText(" Civilización : " + (modelo.getCivilizacion().getNombre())+" ");
 			this.etiquetas[2].setText(" Dinero que otorga : " + (modelo.getDinero())+" ");
-			//this.etiquetas[3].setText(" Cantidad de Unidades : " + (modelo.getUnidades().getCantidadElementos()) + " ");
-			//this.etiquetas[4].setText(" Cantidad de Edificios : " + (modelo.getEdificios().getCantidadElementos()) + " ");
+
 		} else
 			PonerEtiquetasEnBlanco();
 	}
@@ -80,9 +79,9 @@ public class PanelRegion extends JInternalFrame implements Observer{
 	}
 	
 	private void crearEtiquetas(){
-		this.etiquetas = new JLabel[5];
+		this.etiquetas = new JLabel[2];
 		Border borde = new MetalBorders.Flush3DBorder();
-		for (int cont = 0; cont < 5; cont++){
+		for (int cont = 0; cont < 2; cont++){
 			this.etiquetas[cont] = new JLabel();
 			this.etiquetas[cont].setBorder(borde);
 			this.etiquetas[cont].setFont( new Font("Helvetica", Font.BOLD, 13 ) );
@@ -93,10 +92,8 @@ public class PanelRegion extends JInternalFrame implements Observer{
      
 	private void PonerEtiquetasEnBlanco(){
 		this.etiquetas[0].setText(" Region: ");
-		this.etiquetas[1].setText(" Civilización : ");
-		this.etiquetas[2].setText(" Dinero que otorga : ");
-		this.etiquetas[3].setText(" Cantidad de Unidades : ");
-		this.etiquetas[4].setText(" Cantidad de Edificios : ");
+		this.etiquetas[1].setText(" Dinero que otorga : ");
+		
 	}
 	
 }
