@@ -22,7 +22,7 @@ import modelo.Region;
 
 
 
-public class VistaRegionReducida extends JInternalFrame implements Observer{
+public class PanelRegion extends JInternalFrame implements Observer{
 	
 	//Componentes
 	private JPanel panel;
@@ -31,7 +31,7 @@ public class VistaRegionReducida extends JInternalFrame implements Observer{
 	//Modelo
 	private Region modelo;
 	
-	public VistaRegionReducida(String titulo){
+	public PanelRegion(String titulo){
 		//Llamo al constructor del padre
 		super(titulo,false,false,false,false);
 		this.setResizable(false);

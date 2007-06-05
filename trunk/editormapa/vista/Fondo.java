@@ -57,7 +57,7 @@ public class Fondo extends JRootPane implements Observer{
 		labelImagen.setAlignmentY(SwingConstants.TOP);
 		//this.getContentPane().add(labelImagen);
 		this.getLayeredPane().add(labelImagen);
-		this.getLayeredPane().add(new VistaRegionReducida("Región"));
+		this.getLayeredPane().add(new PanelRegion("Región"));
 		//creo los contenedores de los puntos y de los poligonos			
 		puntosX = new ArrayList();
 		puntosY = new ArrayList();
