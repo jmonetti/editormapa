@@ -2,9 +2,11 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,6 +14,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,7 +31,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	private ArrayList puntosX;
 	private ArrayList puntosY;
 	private ArrayList Poligonos;
-	public JPanel panel;
+	public JLayeredPane panel;
 	private static VistaMapa instance= null;
 	
 	public static VistaMapa getInstance(){
@@ -43,27 +46,22 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	}
 	private VistaMapa(){
 		super();
-		panel = new JPanel();
+		panel = new JLayeredPane();
 		//creo una etiqueta para agregar la imagen de fondo
 		labelImagen = new JLabel(); 
-		//Creo la imagen de fondo
-		ImageIcon imagen = new ImageIcon("mapa.gif");
-		//agrego la imagen al fondo
-		labelImagen.setIcon(imagen);
-		labelImagen.setBackground(Color.blue);
-		labelImagen.setOpaque(true);
-		labelImagen.setBounds(0, 0, imagen.getIconWidth(), imagen.getIconHeight());
-		labelImagen.setAlignmentX(SwingConstants.LEFT);
-		labelImagen.setAlignmentY(SwingConstants.TOP);
+		panel.add(labelImagen);
+		
 		
 		puntosX = new ArrayList();
 		puntosY = new ArrayList();
-		panel.add(labelImagen);
+		
 		this.getContentPane().add(panel);
 		this.Poligonos = new ArrayList();
 		this.setVisible(true);
-		this.setBounds(0, 0, imagen.getIconWidth(), imagen.getIconHeight());
 		this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
+
+		//Establezco el tamaño y las coordenadas
+		
 	}
 	public boolean agregarPuntoAlArea(int x, int y){
 		//si el punto pertenece a la imagen
@@ -73,7 +71,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			Graphics g = this.getGraphics();
 			//grafico un punto
 			g.setColor(Color.red);
-			g.fillOval(x,y, 8, 8);
+			g.fillOval(x,y, 4, 4);
 			g.setColor(Color.black);
 			return true;
 		}
@@ -127,7 +125,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		for(int i=0;i<puntosX.size();i++){
 			int x = ((Integer)puntosX.get(i)).intValue();
 			int y = ((Integer)puntosY.get(i)).intValue();
-			g.fillOval(x,y, 4, 4);
+			g.fillOval(x,y, 2, 2);
 		}
 		
 	}
@@ -136,14 +134,24 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		dibujarPuntos();
 		dibujarPoligonos();
 	}
-	/*public void repaint(){
-		this.paint(this.getGraphics());
-	}*/
 	public void update(Observable o, Object arg) {
 		Mapa m = (Mapa)o;		
 		this.agregarRegion(0);
 	}
-	public void setLocation(Point p){
-		System.out.println("entra aca");
+	public void setImagen(String path) {
+		
+		//Creo la imagen de fondo
+		ImageIcon imagen = new ImageIcon(path);
+		//agrego la imagen al fondo
+		labelImagen.setIcon(imagen);
+		labelImagen.setBackground(Color.blue);
+		labelImagen.setOpaque(true);
+		labelImagen.setBounds(0, 0, imagen.getIconWidth(), imagen.getIconHeight());
+		labelImagen.setAlignmentX(SwingConstants.LEFT);
+		labelImagen.setAlignmentY(SwingConstants.TOP);
+		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setBounds(0, 0, labelImagen.getWidth(), 2*tamanoPantalla.height / 3);
+		
+		
 	}
 }
