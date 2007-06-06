@@ -12,9 +12,8 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		Mapa mapa = Mapa.getInstance();
-		mapa.addObserver(VistaMapa.getInstance());
-		VistaPrincipal vista = new VistaPrincipal();
 		
+		mapa.addObserver(VistaPrincipal.getInstance().getVistaMapa());
 
 	}
 

@@ -10,18 +10,7 @@ import javax.swing.MenuElement;
 import controlador.ControladorMenu;
 
 public class VistaMenu  extends JMenuBar{
-	private static VistaMenu instance= null;
 	
-	public static VistaMenu getInstance(){
-		if(instance == null)
-			return crearInstancia();
-		else
-			return instance;
-	}
-	private static VistaMenu crearInstancia() {
-		instance = new VistaMenu();
-		return instance;
-	}
 	private void crearMenuArchivo(JMenuBar barra) {
 		//Creo el menu Archivo
 		JMenu menuArchivo = new JMenu("Archivo");
@@ -42,15 +31,13 @@ public class VistaMenu  extends JMenuBar{
 		//Creo el menu Archivo
 		JMenu menuEdicion = new JMenu("Edición");
 		menuEdicion.setName("Edicion");
+		menuEdicion.setEnabled(false);
 		//Creo los sub menus
 		JMenuItem menuAgregarRegion = new JMenuItem("Agregar región");
-		JMenuItem menuEdicionTerminar = new JMenuItem("Terminar");
-		menuEdicionTerminar.setEnabled(true);
 		JMenuItem menuQuitarRegion = new JMenuItem("Quitar región");
 		menuQuitarRegion.addActionListener(ControladorMenu.getInstance());
 		//los agrego al menu principal
 		menuEdicion.add(menuAgregarRegion);
-		menuEdicion.add(menuEdicionTerminar);
 		menuEdicion.addSeparator();
 		menuEdicion.add(menuQuitarRegion);
 		
@@ -58,13 +45,22 @@ public class VistaMenu  extends JMenuBar{
 		barra.add(menuEdicion);
 		
 		menuAgregarRegion.addActionListener(ControladorMenu.getInstance());
-		menuEdicionTerminar.addActionListener(ControladorMenu.getInstance());
+		
 	}
-	//TODO TERMINAR ESTO!!!
-	/*
-	public void desHabilitarTodosHijos(String nombre){
-		VistaMenu menu = VistaMenu.getInstance();
-		Component[] subMenus = menu.getComponents();
+	public void desHabilitarMenu(String nombre){
+		cambiarEstadoHabilitado(buscarMenu(nombre),false);
+	}
+	public void habilitarMenu(String nombre){
+		cambiarEstadoHabilitado(buscarMenu(nombre),true);
+		
+	}
+	private void cambiarEstadoHabilitado(Component c, boolean habilitado){
+		if(c!=null)
+			c.setEnabled(habilitado);
+	}
+	private Component buscarMenu(String nombre){
+				
+		Component[] subMenus = this.getComponents();
 		int indice=0;
 		boolean encontrado=false;
 		while(encontrado==false && indice < subMenus.length){
@@ -73,13 +69,12 @@ public class VistaMenu  extends JMenuBar{
 			else
 				indice++;
 		}
-		if(encontrado){
-			//JMenuItem[] componentes = ((JMenu)subMenus[indice]).getme
-			for(int i = 0;i< componentes.length;i++)
-				componentes[i].setEnabled(false);
-		}
-	}*/
-	private VistaMenu(){
+		if(encontrado)
+			return subMenus[indice];
+		else
+			return null;
+	}
+	public VistaMenu(){
 		//creo la barra de menus
 		super();
 		//creo todos los menus

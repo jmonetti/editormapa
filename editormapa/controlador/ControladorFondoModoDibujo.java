@@ -12,6 +12,7 @@ import javax.swing.JRootPane;
 import sun.security.jca.GetInstance;
 
 import vista.VistaMapa;
+import vista.VistaPrincipal;
 
 
 public class ControladorFondoModoDibujo implements MouseListener{
@@ -32,7 +33,7 @@ public class ControladorFondoModoDibujo implements MouseListener{
 			return instance;
 	}
 	public void mousePressed(MouseEvent arg0) {
-		VistaMapa mapa = VistaMapa.getInstance();
+		VistaMapa mapa = VistaPrincipal.getInstance().getVistaMapa();
 		mapa.agregarPuntoAlArea(arg0.getX(), arg0.getY());
 	}
 	public void mouseClicked(MouseEvent arg0) {	}

@@ -24,12 +24,37 @@ public class VistaPrincipal {
 
 	public static JFrame marcoPrincipal=null;
 	private VistaMapa mapa;
-	private FrameRegion panelRegion;
+	private FrameRegion frameRegion;
+	private JDesktopPane dp;
+	private static VistaPrincipal instance= null;
+	private VistaMenu menu;
+	private FrameAgregarRegion frameAgregarRegion;
 	
-	public VistaPrincipal(){
+	public static VistaPrincipal getInstance(){
+		if(instance == null)
+			return crearInstancia();
+		else
+			return instance;
+	}
+	private static VistaPrincipal crearInstancia() {
+		instance = new VistaPrincipal();
+		return instance;
+	}
+	private VistaPrincipal(){
 		startGUI();
 	}
-	
+	public VistaMapa getVistaMapa(){
+		return this.mapa;
+	}
+	public JDesktopPane getJDesktopPane(){
+		return this.dp;
+	}
+	public FrameRegion getFrameRegion(){
+		return this.frameRegion;
+	}
+	public FrameAgregarRegion getFrameAgregarRegion(){
+		return frameAgregarRegion;
+	}
 	private void startGUI() {
 		//creo el marco principal
 		marcoPrincipal = new JFrame("Editor de mapas");
@@ -39,26 +64,32 @@ public class VistaPrincipal {
 		marcoPrincipal.addWindowListener(new ControladorVentanaPrincipal());
 		marcoPrincipal.addWindowFocusListener(new ControladorFocoVentanaPrincipal());
 		//creo la barra de menu
-		VistaMenu menu = VistaMenu.getInstance();
+		menu = new VistaMenu();
 		//agrego la barra al mnarco principal
 		marcoPrincipal.setJMenuBar(menu);
 		//agrego el panel del mapa
 		//mapa = mapa.getInstance();
-		mapa = VistaMapa.getInstance();
+		mapa = new VistaMapa();
 		//muestro el marco
-		JDesktopPane dp = new JDesktopPane();
+		dp = new JDesktopPane();
 		Dimension tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		dp.setSize(tamañoPantalla);
 		dp.setBackground(Color.black);
 		dp.setOpaque(true);
-		panelRegion = new FrameRegion("Datos Región");
+		frameRegion = new FrameRegion("Datos Región");
 		dp.add(mapa);
-		dp.add(panelRegion);
+		dp.add(frameRegion);
 		dp.setVisible(true);
-		
+		frameAgregarRegion = new FrameAgregarRegion("Agregar región");
+		frameAgregarRegion.setVisible(false);
+		dp.add(frameAgregarRegion);
 
 		marcoPrincipal.add(dp);
 		marcoPrincipal.setVisible(true);
+	}
+	public VistaMenu getVistaMenu() {
+		return menu;
+		
 	}
 	
 

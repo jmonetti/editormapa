@@ -11,7 +11,10 @@ import javax.swing.JToolBar;
 import modelo.Mapa;
 
 
+import vista.FrameAgregarRegion;
 import vista.VistaMapa;
+import vista.VistaMenu;
+import vista.VistaPrincipal;
 import controlador.ControladorFondoModoDibujo;
 
 
@@ -19,9 +22,9 @@ public class ComandoAgregarRegion extends ComandoMenu {
 
 	public void ejecutar() {
 		JOptionPane.showMessageDialog(null,"Va a generar una región, ingrese todos los puntos y luego pulse terminar");
-		VistaMapa.getInstance().addMouseListener(ControladorFondoModoDibujo.getInstance());
-		
-		//VistaMenu.getInstance().desHabilitarTodosHijos("Edicion");
+		VistaPrincipal.getInstance().getVistaMapa().addMouseListener(ControladorFondoModoDibujo.getInstance());
+		VistaPrincipal.getInstance().getVistaMenu().desHabilitarMenu("Edicion");
+		VistaPrincipal.getInstance().getFrameAgregarRegion().setVisible(true);
 	}
 		
 		
