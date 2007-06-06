@@ -22,7 +22,7 @@ import modelo.Region;
 
 
 
-public class PanelRegion extends JInternalFrame implements Observer{
+public class FrameRegion extends JInternalFrame implements Observer{
 	
 	//Componentes
 	private JPanel panel;
@@ -31,14 +31,11 @@ public class PanelRegion extends JInternalFrame implements Observer{
 	//Modelo
 	private Region modelo;
 	
-	public PanelRegion(String titulo){
+	public FrameRegion(String titulo){
 		//Llamo al constructor del padre
 		super(titulo,false,false,false,false);
 		this.setResizable(false);
-		//Agrego esta vista como actualizable en el controlador de seleccion
-		//ControladorSeleccion.GetInstance().agregarVistaActualizable(this);
-		//Conecto con el modelo
-		
+				
 		//Defino el tamaño de la pantalla
 		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		//Establezco el tamaño y las coordenadas

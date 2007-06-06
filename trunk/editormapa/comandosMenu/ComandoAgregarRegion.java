@@ -19,7 +19,6 @@ public class ComandoAgregarRegion extends ComandoMenu {
 
 	public void ejecutar() {
 		JOptionPane.showMessageDialog(null,"Va a generar una región, ingrese todos los puntos y luego pulse terminar");
-	
 		VistaMapa.getInstance().addMouseListener(ControladorFondoModoDibujo.getInstance());
 		
 		//VistaMenu.getInstance().desHabilitarTodosHijos("Edicion");

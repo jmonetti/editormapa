@@ -23,11 +23,11 @@ public class ControladorNoMover implements ComponentListener {
 
 	public void componentMoved(ComponentEvent arg0) {
 
-		/*JInternalFrame frame = (JInternalFrame)arg0.getSource();
+		JInternalFrame frame = (JInternalFrame)arg0.getSource();
 		
 		frame.setLocation(this.posX,this.posY);
-		*/
-		System.out.println("entro");
+		
+		//System.out.println("entro");
 
 	}
 

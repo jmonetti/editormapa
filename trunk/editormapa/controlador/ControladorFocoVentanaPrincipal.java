@@ -13,7 +13,6 @@ public class ControladorFocoVentanaPrincipal implements WindowFocusListener {
 
 	public void windowGainedFocus(WindowEvent e) {
 		VistaMapa.getInstance().repaint();
-		System.out.println("FOCUSEO!");
 		/*JFrame f = (JFrame)e.getSource();
 		f.getComponent(0).repaint();*/
 	}
