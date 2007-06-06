@@ -9,7 +9,6 @@ import comandosMenu.ComandoAgregarRegion;
 import comandosMenu.ComandoMenu;
 import comandosMenu.ComandoQuitarRegion;
 import comandosMenu.ComandoSalir;
-import comandosMenu.ComandoTerminar;
 
 public class ControladorMenu implements ActionListener {
 	
@@ -32,7 +31,7 @@ public class ControladorMenu implements ActionListener {
 		comandos.put("Salir", new ComandoSalir());
 		
 		comandos.put("Agregar región" , new ComandoAgregarRegion());
-		comandos.put("Terminar", new ComandoTerminar());
+		comandos.put("Terminar", new ControladorBotonTerminar());
 		comandos.put("Quitar región" , new ComandoQuitarRegion());
 		
 	}

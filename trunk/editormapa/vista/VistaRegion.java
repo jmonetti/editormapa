@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 import controlador.ControladorMouseRegion;
 
-public class VistaRegion extends Component {
+public class VistaRegion extends Component{
 	
 	private Polygon p;
 	private int id;

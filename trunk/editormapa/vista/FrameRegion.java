@@ -39,16 +39,16 @@ public class FrameRegion extends JInternalFrame implements Observer{
 			//Llamo al constructor del padre
 			super(titulo,false,false,false,false);
 			this.setResizable(false); //Hago que no pueda cambiar su tamaño
-			//Agrego esta vista como actualizable en el controlador de seleccion
+
+			//Creo el panel
 			panel = new JLayeredPane();
 			//Defino el tamaño de la pantalla
 			Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 			//Establezco el tamaño y las coordenadas
 			panel.setBounds(tamanoPantalla.width/3, 2 * tamanoPantalla.height / 3, tamanoPantalla.width / 3, tamanoPantalla.height / 3 - 75);
 		    this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-			//Creo el panel
-			
-			this.setBounds(tamanoPantalla.width/3, 2 * tamanoPantalla.height / 3, tamanoPantalla.width / 3, tamanoPantalla.height / 3 - tamanoPantalla.height / 10);
+		    this.setBounds(tamanoPantalla.width/3, 2 * tamanoPantalla.height / 3, tamanoPantalla.width / 3, tamanoPantalla.height / 3 - tamanoPantalla.height / 10);
+		    this.setLocation(0,(int) (2*tamanoPantalla.getHeight()/3) );
 			//Creo las etiquetas del panel y las agrego
 			this.crearEtiquetas();
 			this.PonerEtiquetasEnBlanco();
@@ -57,6 +57,7 @@ public class FrameRegion extends JInternalFrame implements Observer{
 			//agrego esta vista como observadora del modelo
 			this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
 			this.setVisible(true);
+			
 		}
 		
 		/**

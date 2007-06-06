@@ -34,24 +34,13 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	public JLayeredPane panel;
 	private static VistaMapa instance= null;
 	
-	public static VistaMapa getInstance(){
-		if(instance == null)
-			return crearInstancia();
-		else
-			return instance;
-	}
-	private static VistaMapa crearInstancia() {
-		instance = new VistaMapa();
-		return instance;
-	}
-	private VistaMapa(){
+	public VistaMapa(){
 		super();
 		panel = new JLayeredPane();
 		//creo una etiqueta para agregar la imagen de fondo
 		labelImagen = new JLabel(); 
 		panel.add(labelImagen);
-		
-		
+		//creo los arraylist para los puntos		
 		puntosX = new ArrayList();
 		puntosY = new ArrayList();
 		
@@ -59,9 +48,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		this.Poligonos = new ArrayList();
 		this.setVisible(true);
 		this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
-
-		//Establezco el tamaño y las coordenadas
-		
+	
 	}
 	public boolean agregarPuntoAlArea(int x, int y){
 		//si el punto pertenece a la imagen
@@ -71,14 +58,14 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			Graphics g = this.getGraphics();
 			//grafico un punto
 			g.setColor(Color.red);
-			g.fillOval(x,y, 4, 4);
+			g.fillOval(x,y, 9, 9);
 			g.setColor(Color.black);
 			return true;
 		}
 		else
 			return false;
 	}
-	private void agregarRegion(int id){
+	private boolean agregarRegion(int id){
 		if(puntosX.size() >= 3){//si no hay mas de 3 no hago nada, porque son pocos puntos
 			//Convierto los puntos a un array
 			Object[] auxX = puntosX.toArray();
@@ -98,9 +85,14 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			this.Poligonos.add(regNueva);
 			//lo agrego a los contenidos de este objeto
 			this.add(regNueva);
+			System.out.println(p.getBounds());
+			return true;
 		}
-		else
+		else{
 			JOptionPane.showMessageDialog(null,"Debe ingresar mas de 3 puntos para formar una región");
+			return false;
+			
+		}
 	}
 	public void borrarPuntos(){
 		this.puntosX.clear();
@@ -151,7 +143,5 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		labelImagen.setAlignmentY(SwingConstants.TOP);
 		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(0, 0, labelImagen.getWidth(), 2*tamanoPantalla.height / 3);
-		
-		
 	}
 }

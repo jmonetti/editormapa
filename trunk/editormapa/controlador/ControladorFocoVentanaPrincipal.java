@@ -8,11 +8,12 @@ import javax.swing.JFrame;
 
 import sun.awt.RepaintArea;
 import vista.VistaMapa;
+import vista.VistaPrincipal;
 
 public class ControladorFocoVentanaPrincipal implements WindowFocusListener {
 
 	public void windowGainedFocus(WindowEvent e) {
-		VistaMapa.getInstance().repaint();
+		VistaPrincipal.getInstance().getVistaMapa().repaint();
 		System.out.println("a");
 		/*JFrame f = (JFrame)e.getSource();
 		f.getComponent(0).repaint();*/
@@ -21,7 +22,7 @@ public class ControladorFocoVentanaPrincipal implements WindowFocusListener {
 	
 	
 	public void windowLostFocus(WindowEvent e) {
-		VistaMapa.getInstance().repaint();
+		VistaPrincipal.getInstance().getVistaMapa().repaint();
 		System.out.println("a");
 		// TODO Auto-generated method stub
 
