@@ -31,32 +31,15 @@ public class ControladorFondoModoDibujo implements MouseListener{
 		else
 			return instance;
 	}
-	public void mouseClicked(MouseEvent arg0) {
+	public void mousePressed(MouseEvent arg0) {
 		VistaMapa mapa = VistaMapa.getInstance();
 		mapa.agregarPuntoAlArea(arg0.getX(), arg0.getY());
-		
 	}
+	public void mouseClicked(MouseEvent arg0) {	}
 
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent arg0) {}
 
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent arg0) {}
 
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
+	public void mouseReleased(MouseEvent arg0) {}
 }

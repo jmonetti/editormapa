@@ -1,5 +1,6 @@
 import modelo.Mapa;
 
+import vista.VistaMapa;
 import vista.VistaPrincipal;
 
 
@@ -11,7 +12,7 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		Mapa mapa = Mapa.getInstance();
-		//mapa.addObserver(Fondo.getInstance().getVistaMapa());
+		mapa.addObserver(VistaMapa.getInstance());
 		VistaPrincipal vista = new VistaPrincipal();
 		
 

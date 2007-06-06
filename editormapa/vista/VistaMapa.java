@@ -17,11 +17,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import controlador.ControladorFondoModoDibujo;
 import controlador.ControladorNoMover;
 
 import modelo.Mapa;
 
 public class VistaMapa extends JInternalFrame implements Observer{
+	
 	private JLabel labelImagen;
 	private ArrayList puntosX;
 	private ArrayList puntosY;
@@ -40,6 +42,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		return instance;
 	}
 	private VistaMapa(){
+		super();
 		panel = new JPanel();
 		//creo una etiqueta para agregar la imagen de fondo
 		labelImagen = new JLabel(); 
@@ -59,8 +62,8 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		this.getContentPane().add(panel);
 		this.Poligonos = new ArrayList();
 		this.setVisible(true);
-		
-		//this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
+		this.setBounds(0, 0, imagen.getIconWidth(), imagen.getIconHeight());
+		this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
 	}
 	public boolean agregarPuntoAlArea(int x, int y){
 		//si el punto pertenece a la imagen
@@ -120,22 +123,22 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	}
 	public void dibujarPuntos() {
 		Graphics g = this.getGraphics();
-		if(puntosX != null){
-			for(int i=0;i<puntosX.size();i++){
-				int x = ((Integer)puntosX.get(i)).intValue();
-				int y = ((Integer)puntosY.get(i)).intValue();
-				g.fillOval(x,y, 8, 8);
-			}
+		
+		for(int i=0;i<puntosX.size();i++){
+			int x = ((Integer)puntosX.get(i)).intValue();
+			int y = ((Integer)puntosY.get(i)).intValue();
+			g.fillOval(x,y, 4, 4);
 		}
+		
 	}
 	public void paint(Graphics g){
 		super.paint(g);
 		dibujarPuntos();
 		dibujarPoligonos();
 	}
-	public void repaint(){
+	/*public void repaint(){
 		this.paint(this.getGraphics());
-	}
+	}*/
 	public void update(Observable o, Object arg) {
 		Mapa m = (Mapa)o;		
 		this.agregarRegion(0);
