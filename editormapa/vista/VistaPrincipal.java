@@ -51,7 +51,6 @@ public class VistaPrincipal {
 		dp.setSize(tamañoPantalla);
 		dp.setBackground(Color.black);
 		dp.setOpaque(true);
-		
 		panelRegion = new FrameRegion("Datos Región");
 		dp.add(mapa);
 		dp.add(panelRegion);
