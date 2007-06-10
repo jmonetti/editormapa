@@ -47,10 +47,11 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
 	}
 	/**
-	 * Agrega un punto nuevo al mapa. Un conjunto de estos permiten formar un poligono.
-	 * @param x Coordenada x
-	 * @param y
-	 * @return
+	 * Agrega un punto nuevo al mapa. Un conjunto de estos permiten formar un poligono. Si el punto se encuentra fuera
+	 * de la imagen del mapa no lo agrega.
+	 * @param x Coordenada x del punto a agregar
+	 * @param y Coordenada y del punto a agregar
+	 * @return True si pudo agregar el punto, false en caso contrario.
 	 */
 	public boolean agregarPunto(int x, int y){
 		//si el punto pertenece a la imagen
@@ -63,31 +64,45 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		else
 			return false;
 	}
-	private boolean agregarRegion(int id){
-		if(puntosX.size() >= 3){//si no hay mas de 3 no hago nada, porque son pocos puntos
-			//Convierto los puntos a un array
-			Object[] auxX = puntosX.toArray();
-			Object[] auxY = puntosY.toArray();
-			
-			//paso los vectores a int
-			int[] pX = this.toInt(auxX);
-			int[] pY = this.toInt(auxY);
-			
-			//creo un poligono
-			Polygon regNueva = new VistaRegion(pX,pY,pX.length, id);
-			//lo agrego a los poligonos
-			this.Poligonos.add(regNueva);
-			labelImagen.repaint();
-			return true;
-		}
-		else{
-			JOptionPane.showMessageDialog(null,"Debe ingresar mas de 3 puntos para formar una región");
-			return false;
-		}
+	/**
+	 * Permite agregar una vista region al mapa. Para esto, usa los puntos que este contiene.
+	 * @param id Id de la region que se representa con la vista
+	 * 
+	 */
+	private void agregarRegion(int id){
+		//Convierto los puntos a un array
+		Object[] auxX = puntosX.toArray();
+		Object[] auxY = puntosY.toArray();
+		
+		//paso los vectores a int
+		int[] pX = this.toInt(auxX);
+		int[] pY = this.toInt(auxY);
+		
+		//creo un poligono
+		Polygon regNueva = new VistaRegion(pX,pY,pX.length, id);
+		//lo agrego a los poligonos
+		this.Poligonos.add(regNueva);
+		labelImagen.repaint();
 	}
+	/**
+	 * Devuelve la cantidad de puntos que hay insertados
+	 * @return
+	 */
+	public int getCantidadPuntos(){
+		return puntosX.size();
+	}
+	/**
+	 * Borra los puntos
+	 */
 	public void borrarPuntos(){
 		this.puntosX.clear();
 		this.puntosY.clear();
+	}
+	/**
+	 * Borra los poligonos cargados
+	 */
+	public void borrarPoligonos() {
+		this.Poligonos.clear();
 	}
 	private int[] toInt(Object[] v) {
 		int[] vectorAux = new int[v.length];
@@ -100,18 +115,32 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		Mapa m = (Mapa)o;		
 		this.agregarRegion(0);
 	}
+	/**
+	 * Cambia la imagen de fondo
+	 * @param path Ruta donde se encuentra la imagen de fondo
+	 */
 	public void setImagen(String path) {
 		
 		//creo una etiqueta para agregar la imagen de fondo
+		borrarPuntos();
+		borrarPoligonos();
 		labelImagen = new LabelFondo(path, puntosX, puntosY, Poligonos); 
 		panel.add(labelImagen);
 		
 		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(0, 0, labelImagen.getWidth(), 2*tamanoPantalla.height / 3);
 	}
+	/**
+	 * @return La instancia de imagen de fondo
+	 */
 	public Component getLabelFondo() {
 		return this.labelImagen;
 	}
+	/**
+	 * Busca la vista region que contenga a un punto determinado
+	 * @param p Punto donde se desea encontrar un poligono
+	 * @return La vista region encontrada, de lo contrario devuelve null.
+	 */
 	public VistaRegion getPoligonoEn(Point p){
 		int i = 0;
 		boolean encontrado = false;
