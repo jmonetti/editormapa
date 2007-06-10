@@ -1,8 +1,10 @@
 package controlador;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import vista.VistaPrincipal;
 import vista.VistaRegion;
 
 public class ControladorMouseRegion implements MouseListener {
@@ -24,9 +26,12 @@ public class ControladorMouseRegion implements MouseListener {
 		super();
 	}
 	public void mouseClicked(MouseEvent arg0) {
-		/*VistaRegion region = (VistaRegion)arg0.getSource();
-		System.out.println(region.getId());*/
-		System.out.println("click!");
+		Point punto = new Point(arg0.getX(), arg0.getY());
+		VistaRegion vR = VistaPrincipal.getInstance().getVistaMapa().getPoligonoEn(punto);
+		if(vR != null)
+			System.out.println(vR.getBounds());
+		else
+			System.out.println("No clickeaste nada huevon!");
 		
 	}
 
