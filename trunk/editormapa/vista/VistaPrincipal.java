@@ -1,22 +1,14 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
+
 
 import controlador.ControladorFocoVentanaPrincipal;
-import controlador.ControladorFondoModoDibujo;
-import controlador.ControladorMenu;
-import controlador.ControladorNoMover;
 import controlador.ControladorVentanaPrincipal;
 
 
@@ -62,13 +54,12 @@ public class VistaPrincipal {
 		marcoPrincipal.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//le agrego sus controladores
 		marcoPrincipal.addWindowListener(new ControladorVentanaPrincipal());
-		marcoPrincipal.addWindowFocusListener(new ControladorFocoVentanaPrincipal());
+		//marcoPrincipal.addWindowFocusListener(new ControladorFocoVentanaPrincipal());
 		//creo la barra de menu
 		menu = new VistaMenu();
 		//agrego la barra al mnarco principal
 		marcoPrincipal.setJMenuBar(menu);
 		//agrego el panel del mapa
-		//mapa = mapa.getInstance();
 		mapa = new VistaMapa();
 		//muestro el marco
 		dp = new JDesktopPane();
@@ -89,7 +80,6 @@ public class VistaPrincipal {
 	}
 	public VistaMenu getVistaMenu() {
 		return menu;
-		
 	}
 	
 

@@ -1,6 +1,4 @@
 import modelo.Mapa;
-
-import vista.VistaMapa;
 import vista.VistaPrincipal;
 
 

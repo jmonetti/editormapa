@@ -1,15 +1,7 @@
 package controlador;
 
-import java.awt.Canvas;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-
-import javax.swing.JRootPane;
-
-import sun.security.jca.GetInstance;
 
 import vista.VistaMapa;
 import vista.VistaPrincipal;
@@ -34,7 +26,7 @@ public class ControladorFondoModoDibujo implements MouseListener{
 	}
 	public void mousePressed(MouseEvent arg0) {
 		VistaMapa mapa = VistaPrincipal.getInstance().getVistaMapa();
-		mapa.agregarPuntoAlArea(arg0.getX(), arg0.getY());
+		mapa.agregarPunto(arg0.getX(), arg0.getY());
 	}
 	public void mouseClicked(MouseEvent arg0) {	}
 

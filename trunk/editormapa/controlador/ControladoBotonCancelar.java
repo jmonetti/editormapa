@@ -13,8 +13,6 @@ public class ControladoBotonCancelar implements ActionListener{
 		vp.getVistaMenu().habilitarMenu("Edicion");
 		vp.getVistaMapa().borrarPuntos();
 		VistaPrincipal.getInstance().getFrameAgregarRegion().setVisible(false);
-		
-		
 	}
 
 }

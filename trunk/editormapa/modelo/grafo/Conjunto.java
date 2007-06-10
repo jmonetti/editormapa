@@ -96,7 +96,7 @@ public class Conjunto {
 	 *
 	 */
 	public void vaciar(){
-		this.elementos.retainAll(elementos);
+		this.elementos.removeAll(elementos);
 	}
 	/**
 	 * @return Devuelve todos los elementos en un ArrayList, sin ningun orden en particular
