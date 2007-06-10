@@ -4,14 +4,11 @@ import vista.VistaPrincipal;
 
 public class Principal {
 
-
-	private Mapa mapa;
-	
 	public static void main(String[] args) {
 		
-		Mapa mapa = Mapa.getInstance();
+		Mapa.getInstance();
+		VistaPrincipal.getInstance().getVistaMapa();
 		
-		mapa.addObserver(VistaPrincipal.getInstance().getVistaMapa());
 
 	}
 

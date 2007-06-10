@@ -3,17 +3,13 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Observable;
 
 import modelo.grafo.*;
-
-
-
 
 /**@author Grupo 2, Algoritmos y programación 3, Cátedra Fontela<br>1er cuat 2007
  * <br>Esta clase representa el mapa
  */
-public class Mapa extends Observable{
+public class Mapa{
 	
 	private Grafo regiones;//grafo con las regiones
 	private String nombre;
@@ -56,8 +52,6 @@ public class Mapa extends Observable{
 	public void AgregarRegion(Region regionNueva){
 		try{
 			regiones.agregarVertice(regionNueva);
-			setChanged();
-			notifyObservers();
 		}catch(Exception e){}
 	}
 	/**

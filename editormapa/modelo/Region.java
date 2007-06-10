@@ -3,9 +3,8 @@ package modelo;
 
 import java.util.Observable;
 
-
 /**
- * @author          Grupo 2, Algoritmos y programacin 3, Ctedra Fontela<br>1er cuat 2007    
+ * @author Grupo 2, Algoritmos y programacin 3, Ctedra Fontela<br>1er cuat 2007    
  * <br>Esta clase representa la regin que puede ser incluida en el mapa.
  */
 public class Region extends Observable{
@@ -43,6 +42,7 @@ public class Region extends Observable{
 	 */
 	public void setDinero(int dinero){
 		this.dinero = dinero;
+		this.ActualizarObservadores();
 	}
 	/**
 	 * @return      El dinero que entrega la Region por turno
@@ -58,6 +58,7 @@ public class Region extends Observable{
 	 */
 	public void setNombre(String nombreNuevo){
 		this.nombre= nombreNuevo;
+		this.ActualizarObservadores();
 	}
 	/**
 	 * @return      Todos los edificios que tiene la regin
@@ -71,5 +72,13 @@ public class Region extends Observable{
 			Region r2 = (Region)o;
 			return (this.getId() == r2.getId());
 		}
+	}
+	
+	/**
+	 * Actualiza los observadores
+	 */
+	public void ActualizarObservadores(){
+		this.setChanged();
+		this.notifyObservers();
 	}
 }

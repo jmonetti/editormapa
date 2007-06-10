@@ -12,12 +12,11 @@ import java.util.Observer;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import controlador.ControladorNoMover;
 
-import modelo.Mapa;
+import modelo.Region;
 
 public class VistaMapa extends JInternalFrame implements Observer{
 	
@@ -25,7 +24,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	private List puntosX;
 	private List puntosY;
 	private List Poligonos;
-	public JLayeredPane panel;
+	public JScrollPane panel;
 	
 	/**
 	 * Constructor de la clase. Inicializa la vista del mapa.
@@ -33,14 +32,11 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	 */
 	public VistaMapa(){
 		super();
-		panel = new JLayeredPane();
 		//creo los arraylist para los puntos		
 		puntosX = new ArrayList();
 		puntosY = new ArrayList();
 		//creo el array para los poligonos
 		this.Poligonos = new ArrayList();
-		//agrego el panel principal al frame
-		this.getContentPane().add(panel);
 		//lo pongo visible
 		this.setVisible(true);
 		//le agrego el controlador que no permite que se mueva de su lugar
@@ -111,9 +107,12 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		
 		return vectorAux;
 	}
+	/**
+	 * Establece que realizar cuando el modelo cambia
+	 */
 	public void update(Observable o, Object arg) {
-		Mapa m = (Mapa)o;		
-		this.agregarRegion(0);
+		Region region = (Region) o;
+		agregarRegion(region.getId());
 	}
 	/**
 	 * Cambia la imagen de fondo
@@ -125,10 +124,10 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		borrarPuntos();
 		borrarPoligonos();
 		labelImagen = new LabelFondo(path, puntosX, puntosY, Poligonos); 
-		panel.add(labelImagen);
-		
+		panel = new JScrollPane(labelImagen);
+		this.getContentPane().add(panel);
 		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setBounds(0, 0, labelImagen.getWidth(), 2*tamanoPantalla.height / 3);
+		this.setBounds(0, 0, tamanoPantalla.width, 2*tamanoPantalla.height / 3);
 	}
 	/**
 	 * @return La instancia de imagen de fondo
