@@ -29,7 +29,7 @@ public class ControladorMouseRegion implements MouseListener {
 		Point punto = new Point(arg0.getX(), arg0.getY());
 		VistaRegion vR = VistaPrincipal.getInstance().getVistaMapa().getPoligonoEn(punto);
 		if(vR != null)
-			System.out.println(vR.getBounds());
+			System.out.println(vR.getId());
 		else
 			System.out.println("No clickeaste nada huevon!");
 		

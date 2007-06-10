@@ -27,6 +27,9 @@ public class ControladorBotonTerminar implements ActionListener {
 			vistaPrincipal.getVistaMenu().habilitarMenu("Edicion");
 			//creo una nueva region vacia
 			Region regionNueva = new Region("",0);
+			//Agrego a la vista mapa como observadora de la region y actualizo los obs
+			regionNueva.addObserver(vistaMapa);
+			regionNueva.ActualizarObservadores();
 			//la agrego al mapa
 			Mapa.getInstance().AgregarRegion(regionNueva);
 			//borro la barra de herramientas de agregar
