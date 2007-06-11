@@ -36,7 +36,7 @@ public class ControladorMouseRegion implements MouseListener {
 		int id = -1;
 		if (vR != null)
 			id = vR.getId();
-		region = Mapa.getInstance().buscarRegion(id, new ComparadorIdRegionConInt());
+		region = Mapa.getInstance().buscarRegion(new Integer(id), new ComparadorIdRegionConInt());
 		if (arg0.getButton() == MouseEvent.BUTTON1)
 			ControladorSeleccion.GetInstance().setSlot1(region);
 		else
