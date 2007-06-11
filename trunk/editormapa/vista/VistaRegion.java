@@ -19,6 +19,11 @@ public class VistaRegion extends Polygon{
 		return this.id;
 		
 	}
+	/**
+	 * Devuelve un xml con todos los puntos del poligono
+	 * @param dom Documento al cual se agregan
+	 * @return Un elemento de Dom parser con todos los puntos
+	 */
 	public Node toXml(Document dom) {
 		
 		Element vistaRegion = dom.createElement("Poligono");

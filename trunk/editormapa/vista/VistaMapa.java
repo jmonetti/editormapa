@@ -174,27 +174,41 @@ public class VistaMapa extends JInternalFrame{
 		} else
 			return false;
 	}
-	
+	/**
+	 * Permite obtener un elemento de un documento xml que contiene todos los poligonos
+	 * de la vista, asi como tambien la ruta del mapa cargado
+	 * @param dom Documento al cual se agregan
+	 * @return Un elemento de documento xml de dom
+	 */
 	public Element toXml(Document dom){
+		//creo el elemento principal
 		Element vista = dom.createElement("Vista");
-		
+		//creo y cargo el elemento de la ruta
 		Element src = dom.createElement("Src");
 		Text hijoSrc = dom.createTextNode(((LabelFondo)this.labelImagen).getPath());
 		src.appendChild(hijoSrc);
+		//lo agrego al principal
+		vista.appendChild(src);
 		
-		
+		//recorro todos los elementos, genero los poligonos y los agrego al xml
 		for(int indice = 0; indice < Poligonos.size(); indice++){
+			//obtengo el primer poligono
 			VistaRegion vistaRegion = (VistaRegion)this.Poligonos.get(indice);
+			//lo busco en el mapa
 			Region reg = Mapa.getInstance().buscarRegion(new Integer(vistaRegion.getId()), new ComparadorIdRegionConInt());
+			//si lo encontro
 			if(reg != null){
+				//creo un elemento region
 				Element region = dom.createElement("Region");
-				
+				//le agrego el nombre
 				Element nombre = dom.createElement("Nombre");
 				Text hijoNombre = dom.createTextNode(reg.getNombre());
-				
+				nombre.appendChild(hijoNombre);
+				//agrego el nombre al elemento region
 				region.appendChild(nombre);
+				//le agrego a la region todos los puntos
 				region.appendChild(vistaRegion.toXml(dom));
-				
+				//agrego la region a la vista principal
 				vista.appendChild(region);
 			}
 			
