@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import vista.FrameAgregarRegion;
 import vista.VistaMapa;
 import vista.VistaPrincipal;
 
@@ -29,9 +30,9 @@ public class ControladorFondoModoDibujo implements MouseListener{
 		if (arg0.getButton() == MouseEvent.BUTTON1)
 			mapa.agregarPunto(arg0.getX(), arg0.getY());
 		if (arg0.getButton() == MouseEvent.BUTTON3){
-			VistaPrincipal.getInstance().getFrameAgregarRegion().limpiarCajasDeTexto();
-			VistaPrincipal.getInstance().getFrameAgregarRegion().setVisible(true);
-			VistaPrincipal.getInstance().getFrameAgregarRegion().requestFocus();
+			FrameAgregarRegion.getInstance().setVisible(true);
+			FrameAgregarRegion.getInstance().limpiarCajasDeTexto();
+			FrameAgregarRegion.getInstance().requestFocus();
 		}
 	}
 	public void mouseClicked(MouseEvent arg0) {	}

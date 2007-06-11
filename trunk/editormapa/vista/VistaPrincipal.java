@@ -7,8 +7,6 @@ import java.awt.Toolkit;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
-
-import controlador.ControladorFocoVentanaPrincipal;
 import controlador.ControladorVentanaPrincipal;
 
 
@@ -21,7 +19,6 @@ public class VistaPrincipal {
 	private JDesktopPane dp;
 	private static VistaPrincipal instance= null;
 	private VistaMenu menu;
-	private FrameAgregarRegion frameAgregarRegion;
 	
 	public static VistaPrincipal getInstance(){
 		if(instance == null)
@@ -45,8 +42,8 @@ public class VistaPrincipal {
 	public FrameRegion getFrameRegion(){
 		return this.frameRegion1;
 	}
-	public FrameAgregarRegion getFrameAgregarRegion(){
-		return frameAgregarRegion;
+	public VistaMenu getVistaMenu() {
+		return menu;
 	}
 	private void startGUI() {
 		//Defino el tamaño de la pantalla
@@ -79,12 +76,5 @@ public class VistaPrincipal {
 		marcoPrincipal.add(dp);
 		marcoPrincipal.setVisible(true);
 		
-		frameAgregarRegion = new FrameAgregarRegion("Agregar región");
-		frameAgregarRegion.setVisible(false);
 	}
-	public VistaMenu getVistaMenu() {
-		return menu;
-	}
-	
-
 }

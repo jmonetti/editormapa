@@ -39,8 +39,8 @@ public class ControladorBotonActualizar implements ActionListener {
 			regionNueva.ActualizarObservadores();
 			//la agrego al mapa
 			Mapa.getInstance().AgregarRegion(regionNueva);
-			//borro la barra de herramientas de agregar
-			vistaPrincipal.getFrameAgregarRegion().setVisible(false);
+			//escondo la ventana de agregar
+			FrameAgregarRegion.getInstance().setVisible(false);
 			//borro los puntos del mapa
 			vistaMapa.borrarPuntos();
 		}
