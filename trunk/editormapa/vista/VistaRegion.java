@@ -24,13 +24,21 @@ public class VistaRegion extends Polygon{
 		Element vistaRegion = dom.createElement("Poligono");
 		
 		for(int indice = 0; indice < super.npoints; indice++){
-			Element region = dom.createElement("Punto");
+			Element punto = dom.createElement("Punto");
 			
 			Element puntoX = dom.createElement("x");
 			Text hijoPuntoX = dom.createTextNode(Integer.toString(super.xpoints[indice]));
 			puntoX.appendChild(hijoPuntoX);
 			
+			Element puntoY = dom.createElement("y");
+			Text hijoPuntoY = dom.createTextNode(Integer.toString(super.ypoints[indice]));
+			puntoY.appendChild(hijoPuntoY);
+			
+			punto.appendChild(puntoX);
+			punto.appendChild(puntoY);
+			
+			vistaRegion.appendChild(punto);
 		}
-		return null;
+		return vistaRegion;
 	}
 }

@@ -25,7 +25,7 @@ public class ControladorBotonActualizar implements ActionListener {
 		VistaPrincipal vistaPrincipal = VistaPrincipal.getInstance(); 
 		VistaMapa vistaMapa = vistaPrincipal.getVistaMapa();  
 		//Si la cantidad de puntos es menor a 3 no permito que se ingrese
-		if(vistaMapa.getCantidadPuntos() > 3){
+		if(vistaMapa.getCantidadPuntos() >= 3){
 			//saco el escuchador de dibujo
 			vistaMapa.getLabelFondo().removeMouseListener(ControladorFondoModoDibujo.getInstance());
 			//agrego el escuchador de la seleccion
