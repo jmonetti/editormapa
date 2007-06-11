@@ -3,6 +3,11 @@ package modelo;
 
 import java.util.Observable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.Text;
+
 /**
  * @author Grupo 2, Algoritmos y programacin 3, Ctedra Fontela<br>1er cuat 2007    
  * <br>Esta clase representa la regin que puede ser incluida en el mapa.
@@ -80,5 +85,35 @@ public class Region extends Observable{
 	public void ActualizarObservadores(){
 		this.setChanged();
 		this.notifyObservers();
+	}
+	/**
+	 * Permite generar un elemento del Xerces Dom Parser para poder hacerlo persisitir
+	 * en forma de xml
+	 * @param dom Documento al cual se va a agregar
+	 * @return Elemento perteneciente a una region
+	 */
+	public Element toXml(Document dom){
+		
+		String TAG_NOMBRE = "Nombre";
+		String TAG_DINERO = "Dinero";
+		
+		//creo el elemento
+		Element nombre = dom.createElement(TAG_NOMBRE);
+		//creo el hijo
+		Text hijoNombre = dom.createTextNode(this.getNombre());
+		//lo agrego al elemento
+		nombre.appendChild(hijoNombre);
+		
+		Element dinero = dom.createElement(TAG_DINERO);
+		Text hijoDinero = dom.createTextNode(Integer.toString(this.getDinero()));
+		dinero.appendChild(hijoDinero);
+		
+		//creo el elemento para devolver
+		Element region = dom.createElement("Region");
+		//le agrego todos los hijos que cree recien
+		region.appendChild(nombre);
+		region.appendChild(dinero);
+		
+		return region;
 	}
 }
