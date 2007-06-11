@@ -5,6 +5,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
+import vista.VistaMapa;
+import vista.VistaMenu;
 import vista.VistaPrincipal;
 
 public class ComandoAbrirImagen extends ComandoMenu {
@@ -14,11 +16,13 @@ public class ComandoAbrirImagen extends ComandoMenu {
 		JFileChooser ventanaArchivos = new JFileChooser();
 		ventanaArchivos.setFileFilter(new FiltroArchivos());
 		ventanaArchivos.setAcceptAllFileFilterUsed(false);
-		int opcion = ventanaArchivos.showOpenDialog(null);
+		int opcion = ventanaArchivos.showOpenDialog(VistaPrincipal.getInstance().getJDesktopPane());
 		if(opcion == JFileChooser.APPROVE_OPTION){
 			VistaPrincipal.getInstance().getVistaMapa().setImagen(ventanaArchivos.getSelectedFile().getPath());
 			VistaPrincipal.getInstance().getVistaMenu().habilitarMenu("Edicion");
 		}
+		
+			
 		
 	}
 	
