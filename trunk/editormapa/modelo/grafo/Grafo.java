@@ -1,7 +1,6 @@
 package modelo.grafo;
 
 
-import modelo.grafo.*;
 import java.util.*;
 /**
  * @author          Grupo 2, Algoritmos y programación 3, Cátedra Fontela<br>1er cuat 2007  <br>Esta clase tiene el mismo sentido que un grafo matematico. Se pueden agregar, quitar, buscar  vertices, asi como tambien crear relaciones dirigidas o no dirigidas entre los mismos
@@ -163,6 +162,30 @@ public class Grafo {
 				return verticeAux;
 			else
 				return null;
+		}
+	}
+	
+	/**
+ 	 * Vacia el grafo (elimina todos los vertices y aristas)
+	 */
+	public void vaciar(){
+		//Monto un iterador de vertices del grafo
+		Iterator iteradorVertices = vertices.iterator();
+		Arista aristaAux;
+		Vertice verticeAux;
+		//obtengo todos los vertices del grafo
+		while (iteradorVertices.hasNext()){
+			verticeAux = (Vertice) iteradorVertices.next();
+			//por cada vertice obtengo sus aristas salientes
+			Iterator iteradorAristas = verticeAux.getAristasSalientes().iterator();
+			//mientras tenga aristas salientes
+			while(iteradorAristas.hasNext()){
+				//Elimino cada arista
+				aristaAux = (Arista)iteradorAristas.next(); 
+				verticeAux.elimiarAristaSaliente(aristaAux);
+			}
+			//Elimino el vertice
+			this.eliminarVertice(verticeAux);
 		}
 	}
 	
