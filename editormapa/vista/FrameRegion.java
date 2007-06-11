@@ -3,7 +3,6 @@ package vista;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,22 +11,22 @@ import javax.swing.BorderFactory;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.plaf.metal.MetalBorders;
-import javax.swing.plaf.metal.MetalInternalFrameUI;
 
 
 import controlador.ControladorNoMover;
+import controlador.ControladorSeleccion;
 
 import modelo.Region;
 
-
-
-public class FrameRegion extends JInternalFrame implements Observer{
+public class FrameRegion extends JInternalFrame implements ActualizablePorSeleccion, Observer{
 	
 		private JLayeredPane panel;
 		private JLabel[] etiquetas;
+		
+		//Modelo
+		private Region region;
 		
 		private static int CantidadEtiquetas = 2;
 		
@@ -56,20 +55,11 @@ public class FrameRegion extends JInternalFrame implements Observer{
 			this.getContentPane().add(panel);
 			//agrego esta vista como observadora del modelo
 			this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
+			//agrego esta vista como actualizable por seleccion
+			ControladorSeleccion.GetInstance().agregarVistaActualizableSlot1(this);
 			this.setVisible(true);
-			
 		}
 		
-		/**
-		 * Se encarga de actualizar a la vista, cuando el modelo cambia.
-		 */
-		public void update(Observable arg0, Object arg1) {
-			//Seteo el texto de las etiquetas con los datos del modelo
-			//this.etiquetas[0].setText(" Region: " + (modelo.getNombre())+" ");
-			//this.etiquetas[2].setText(" Dinero que otorga : " + (modelo.getDinero())+" ");
-			
-			
-		}
 		/**
 		 * Crea, configura y agrega las etiquetas al panel de la vista
 		 */
@@ -93,8 +83,23 @@ public class FrameRegion extends JInternalFrame implements Observer{
 		 */
 		private void PonerEtiquetasEnBlanco(){
 			this.etiquetas[0].setText(" Region: ");
-			this.etiquetas[1].setText(" Civilización : ");
-			
+			this.etiquetas[1].setText(" Dinero : ");
+		}
+
+		public void setNuevaRegion(Region region) {
+			if (this.region != null)
+				this.region.deleteObserver(this);
+			this.region = region;
+			if (this.region != null)
+				this.region.addObserver(this);
+		}
+
+		public void update(Observable arg0, Object arg1) {
+			if (this.region != null){
+				this.etiquetas[0].setText(" Region: " + this.region.getNombre());
+				this.etiquetas[1].setText(" Dinero : " + this.region.getDinero());
+			} else
+				PonerEtiquetasEnBlanco();
 		}
 	
 }
