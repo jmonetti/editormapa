@@ -189,10 +189,19 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		Text hijoSrc = dom.createTextNode(((LabelFondo)this.labelImagen).getPath());
 		src.appendChild(hijoSrc);
 		
+		
 		for(int indice = 0; indice < Poligonos.size(); indice++){
 			VistaRegion vistaRegion = (VistaRegion)this.Poligonos.get(indice);
-			Region reg = Mapa.getInstance().buscarRegion(vistaRegion.getId(), new ComparadorIdRegionConInt);
+			Region reg = Mapa.getInstance().buscarRegion(new Integer(vistaRegion.getId()), new ComparadorIdRegionConInt());
+			Element region = dom.createElement("Region");
+			if(reg != null){
+				Element nombre = dom.createElement("Nombre");
+				Text hijoNombre = dom.createTextNode(reg.getNombre());
+				region.appendChild(nombre);
+			}
+			region.appendChild(vistaRegion.toXml(dom));
 			
 		}
+		return vista;
 	}
 }
