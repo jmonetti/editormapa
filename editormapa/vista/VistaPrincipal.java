@@ -61,12 +61,13 @@ public class VistaPrincipal {
 		menu = new VistaMenu();
 		//agrego la barra al mnarco principal
 		marcoPrincipal.setJMenuBar(menu);
-		//agrego el panel del mapa
+		//creo el panel del mapa
 		mapa = new VistaMapa();
-		//muestro el marco
+		
+		//Creo el desktop pane y le agrego las vistas principales
 		dp = new JDesktopPane();
 		dp.setSize(tamanoPantalla);
-		dp.setBackground(Color.black);
+		dp.setBackground(Color.gray);
 		dp.setOpaque(true);
 		frameRegion1 = new FrameRegion("Datos Región Slot 1", 1, 0,(int) (2*tamanoPantalla.getHeight()/3));
 		frameRegion2 = new FrameRegion("Datos Región Slot 2", 2, tamanoPantalla.width / 3,(int) (2*tamanoPantalla.getHeight()/3));
@@ -74,6 +75,7 @@ public class VistaPrincipal {
 		dp.add(frameRegion1);
 		dp.add(frameRegion2);
 
+		//	muestro el marco
 		marcoPrincipal.add(dp);
 		marcoPrincipal.setVisible(true);
 		

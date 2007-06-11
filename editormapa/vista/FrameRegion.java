@@ -63,6 +63,8 @@ public class FrameRegion extends JInternalFrame implements ActualizablePorSelecc
 			//agrego el panel al frame
 			this.getContentPane().add(panel);
 			//agrego esta vista como observadora del modelo
+			Mapa.getInstance().addObserver(this);
+			//Hago a la ventana no movible
 			this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
 			//agrego esta vista como actualizable por seleccion
 			if (slot == 1)
