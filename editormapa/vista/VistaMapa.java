@@ -7,10 +7,7 @@ import java.awt.Polygon;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -25,7 +22,7 @@ import modelo.ComparadorIdRegionConInt;
 import modelo.Mapa;
 import modelo.Region;
 
-public class VistaMapa extends JInternalFrame implements Observer{
+public class VistaMapa extends JInternalFrame{
 	
 	private JLabel labelImagen;
 	private List puntosX;
@@ -73,7 +70,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	 * @param id Id de la region que se representa con la vista
 	 * 
 	 */
-	private void agregarRegion(int id){
+	public void agregarRegion(int id){
 		//Convierto los puntos a un array
 		Object[] auxX = puntosX.toArray();
 		Object[] auxY = puntosY.toArray();
@@ -114,13 +111,6 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			vectorAux[i]=((Integer)v[i]).intValue();
 		
 		return vectorAux;
-	}
-	/**
-	 * Establece que realizar cuando el modelo cambia
-	 */
-	public void update(Observable o, Object arg) {
-		Region region = (Region) o;
-		agregarRegion(region.getId());
 	}
 	/**
 	 * Cambia la imagen de fondo
