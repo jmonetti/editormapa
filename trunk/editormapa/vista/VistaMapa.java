@@ -130,6 +130,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		//borro lo anterior
 		borrarPuntos();
 		borrarPoligonos();
+		Mapa.getInstance().vaciar();
 		this.getContentPane().removeAll();
 		//creo una etiqueta para poner el fondo
 		labelImagen = new LabelFondo(path, puntosX, puntosY, Poligonos); 
