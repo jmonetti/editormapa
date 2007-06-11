@@ -30,7 +30,7 @@ public class LabelFondo  extends JLabel {
 		this.puntosX = puntosX;
 		this.puntosY = puntosY;
 		this.Poligonos = Poligonos;
-		this.addMouseListener(ControladorMouseRegion.getInstance());
+		//this.addMouseListener(ControladorMouseRegion.getInstance());
 		this.path = path;
 	}
 	
