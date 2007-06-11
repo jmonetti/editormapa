@@ -4,9 +4,12 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JOptionPane;
+
 import modelo.ComparadorIdRegionConInt;
 import modelo.Mapa;
 import modelo.Region;
+import modelo.eRegionNoExistente;
 
 import vista.VistaPrincipal;
 import vista.VistaRegion;
@@ -41,8 +44,21 @@ public class ControladorMouseRegion implements MouseListener {
 			ControladorSeleccion.GetInstance().setSlot1(region);
 		else
 			ControladorSeleccion.GetInstance().setSlot2(region);
+		Region region1 = ControladorSeleccion.GetInstance().getSlot1();
+		Region region2 = ControladorSeleccion.GetInstance().getSlot2();
+		if ((region1 != null) && (region2 != null) &&
+			(!Mapa.getInstance().sonLimitrofes(region1 , region2)))
+				pedirLimitrofes(region1, region2);
 	}
-
+	
+	private void pedirLimitrofes (Region  region1, Region region2){
+		int respuesta = JOptionPane.showConfirmDialog(VistaPrincipal.getInstance().getVistaMapa(), "¿Desea hacer a las regiones limitrofes?", "Limitrofes", JOptionPane.YES_NO_OPTION);
+		if (respuesta == JOptionPane.YES_OPTION)
+			try {
+				Mapa.getInstance().setLimitrofes(region1, region2);
+			} catch (eRegionNoExistente e) {}
+	}
+	
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		

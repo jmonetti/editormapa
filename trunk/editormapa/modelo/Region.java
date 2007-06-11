@@ -86,6 +86,14 @@ public class Region extends Observable{
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+	/**
+	 * @returns Devuelve un string con info de la region
+	 */
+	public String toString(){
+		return ("ID: " + this.getId() + " " + this.getNombre());
+	}
+	
 	/**
 	 * Permite generar un elemento del Xerces Dom Parser para poder hacerlo persisitir
 	 * en forma de xml
