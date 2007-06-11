@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,23 +17,43 @@ import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
+
 import modelo.Mapa;
 import vista.VistaPrincipal;
 
 public class ComandoGenerarArchivos extends ComandoMenu {
 
+	private final static String nombreArchivoConfig = "config.raj";
+	private final static String nombreArchivoRegiones = "Regiones.xml";
+	private final static String nombreArchivoLimitrofes = "Limitrofes";
+	private final static String nombreArchivoVista = "Regiones-vista.xml";
+	
 	public void ejecutar() {
+	
+		
 		//si la cantidad de regiones es mayor a 0 genero el archivo de configuracion
-		if(Mapa.getInstance().getCantidadRegiones() > 0){
-			generarArchivoRegiones("Prueba.xml");
-			//generarArchivoLimitrofes("");
-			//generarArchivoIntefaz();
+		if(Mapa.getInstance().getCantidadRegiones() > 1){
+			JFileChooser ventanaArchivos = new JFileChooser();
+			ventanaArchivos.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			//ventanaArchivos.setAcceptAllFileFilterUsed(false);
+			int opcion = ventanaArchivos.showSaveDialog(VistaPrincipal.getInstance().getJDesktopPane());
+			if(opcion == JFileChooser.APPROVE_OPTION){
+				generarArchivoConfiguracion(ventanaArchivos.getSelectedFile().getAbsolutePath()+ "/" + nombreArchivoConfig);
+				generarArchivoRegiones(ventanaArchivos.getSelectedFile().getAbsolutePath()+ "/" + nombreArchivoRegiones);
+				generarArchivoLimitrofes(ventanaArchivos.getSelectedFile().getAbsolutePath() + "/" + nombreArchivoLimitrofes);
+				generarArchivoIntefaz(ventanaArchivos.getSelectedFile().getAbsolutePath()+ "/" + "/" +nombreArchivoVista);
+			}
 		}
 		else
-			JOptionPane.showMessageDialog(VistaPrincipal.getInstance().getJDesktopPane(),"Debe ingresar al menos una región para poder generar el archivo de configuración");
+			JOptionPane.showMessageDialog(VistaPrincipal.getInstance().getJDesktopPane(),"Debe ingresar al menos dos regiones para poder generar el archivo de configuración");
 	}
 
-	private void generarArchivoIntefaz() {
+	private void generarArchivoConfiguracion(String string) {
+		
+		
+	}
+
+	private void generarArchivoIntefaz(String ruta) {
 		
 		
 	}
@@ -76,4 +98,6 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 		    ie.printStackTrace();
 		}
 	}
+	
+	
 }
