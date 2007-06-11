@@ -164,11 +164,11 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			return null;
 	}
 	/**
-	 * Busca una region que tenga el id pasado por parametro
+	 * Busca una vista region que tenga el id pasado por parametro y la elimina
 	 * @param id Id que se esta buscando
-	 * @return La vista region si la encontro, null en caso contrario
+	 * @return true si la pudo borrar, false en caso contrario
 	 */
-	public VistaRegion getPoligonoPorId(int id){
+	public boolean borrarPoligono(int id){
 		int i = 0;
 		boolean encontrado = false;
 		while(i<Poligonos.size() && !encontrado){
@@ -177,11 +177,13 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			else
 				i++;
 		}
-		if(encontrado)
-			return (VistaRegion)Poligonos.get(i);
-		else
-			return null;
+		if(encontrado){
+			Poligonos.remove(i);
+			return true;
+		} else
+			return false;
 	}
+	
 	public Element toXml(Document dom){
 		Element vista = dom.createElement("Vista");
 		
