@@ -121,7 +121,7 @@ public class FrameAgregarRegion extends JFrame {
 		try{
 			Dinero = Integer.parseInt(this.datos[1].getText());
 		} catch (Exception e){
-			JOptionPane.showMessageDialog(this, "Dinero mal ingresado");
+			JOptionPane.showMessageDialog(VistaPrincipal.getInstance().getJDesktopPane(), "Dinero mal ingresado");
 			return Dinero;
 		}
 		return Dinero;

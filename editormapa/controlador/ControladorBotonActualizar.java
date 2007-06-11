@@ -45,7 +45,7 @@ public class ControladorBotonActualizar implements ActionListener {
 			vistaMapa.borrarPuntos();
 		}
 		else
-			JOptionPane.showMessageDialog(vistaMapa,"Debe ingresar mas de 3 puntos para formar una región");
+			JOptionPane.showMessageDialog(VistaPrincipal.getInstance().getJDesktopPane(),"Debe ingresar mas de 3 puntos para formar una región");
 	}
 	
 }

@@ -19,7 +19,9 @@ public class VistaMenu  extends JMenuBar{
 		JMenuItem menuAbrirImagen = new JMenuItem("Abrir Imagen..");
 		JMenuItem menuGenerarArchivosJuego = new JMenuItem("Generar Archivos juego");
 		JMenuItem menuSalir = new JMenuItem("Salir");
-		
+		//agrego los controladores
+		menuAbrirImagen.addActionListener(ControladorMenu.getInstance());
+		menuGenerarArchivosJuego.addActionListener(ControladorMenu.getInstance());
 		menuSalir.addActionListener(ControladorMenu.getInstance());
 		//los agrego al menu principal
 		menuArchivo.add(menuAbrirImagen);
@@ -29,7 +31,7 @@ public class VistaMenu  extends JMenuBar{
 		//lo agrego a la barra
 		barra.add(menuArchivo);
 		
-		menuAbrirImagen.addActionListener(ControladorMenu.getInstance());
+		
 	}
 	private void crearMenuEdicion(JMenuBar barra){
 		//Creo el menu Archivo
