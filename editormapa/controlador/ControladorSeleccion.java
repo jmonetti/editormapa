@@ -58,11 +58,15 @@ public class ControladorSeleccion {
 	 * @param region Region a setear.
 	 */
 	public void setSlot1 (Region region){
-		if((slot2 != region) && (slot1 != region)){
+		if((slot2 != region) && (slot1 != region) && (region != null)){
 				slot1 = region;
 				actualizarVistasSlot1();
 				region.ActualizarObservadores();
-		}
+		} else
+			if (region == null){
+				slot1 = region;
+				actualizarVistasSlot1();
+			}
 	}
 	/**
 	 * Libera los dos slots
@@ -79,10 +83,14 @@ public class ControladorSeleccion {
 	 */
 	public void setSlot2 (Region region){
 		//no permito seleccionar en los dos slots la misma region
-		if((slot2 != region) && (slot1 != region)){
+		if((slot2 != region) && (slot1 != region) && (region != null)){
+			slot2 = region;
+			actualizarVistasSlot2();
+			region.ActualizarObservadores();
+		} else
+			if (region == null){
 				slot2 = region;
 				actualizarVistasSlot2();
-				region.ActualizarObservadores();
 			}
 	}
 	/**

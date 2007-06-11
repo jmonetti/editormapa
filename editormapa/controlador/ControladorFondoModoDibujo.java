@@ -29,6 +29,7 @@ public class ControladorFondoModoDibujo implements MouseListener{
 		if (arg0.getButton() == MouseEvent.BUTTON1)
 			mapa.agregarPunto(arg0.getX(), arg0.getY());
 		if (arg0.getButton() == MouseEvent.BUTTON3){
+			VistaPrincipal.getInstance().getFrameAgregarRegion().limpiarCajasDeTexto();
 			VistaPrincipal.getInstance().getFrameAgregarRegion().setVisible(true);
 			VistaPrincipal.getInstance().getFrameAgregarRegion().requestFocus();
 		}
