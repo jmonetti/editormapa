@@ -49,9 +49,6 @@ public class FrameAgregarRegion extends JFrame {
 		//agrego el panel al frame
 		this.getContentPane().add(panel);
 		
-		//Hago la ventana siempre focuseada
-		this.addWindowFocusListener(new ControladorFocusearSiempre());
-		this.setAlwaysOnTop(true);
 		//Hago esta vista visible
 		this.setVisible(true);
 	}
