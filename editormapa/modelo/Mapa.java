@@ -161,6 +161,15 @@ public class Mapa extends Observable{
 		return regiones.getInfoVertices().toArrayList();
 		
 	}
+	/**
+	 * Remueve todas las regiones y relaciones de limitrofes del mapa
+	 */
+	public void vaciar(){
+		regiones.vaciar();
+	}
+	/**
+	 * @return una string con la representacion del mapa
+	 */
 	public String toString(){
 		String cadena = new String();
 		
