@@ -10,9 +10,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 import controlador.ControladorNoMover;
 
@@ -155,5 +160,15 @@ public class VistaMapa extends JInternalFrame implements Observer{
 			return (VistaRegion)Poligonos.get(i);
 		else
 			return null;
+	}
+	public Element toXml(Document dom){
+		Element vista = dom.createElement("Vista");
+		
+		Element src = dom.createElement("Src");
+		
+		Text hijoSrc = dom.createTextNode(((LabelFondo)this.labelImagen).getPath());
+		for(int i = 0;i<Poligonos.size();i++){
+			Region reg;
+		}
 	}
 }

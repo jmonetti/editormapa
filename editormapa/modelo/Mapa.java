@@ -8,6 +8,7 @@ import java.util.Observable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 import modelo.grafo.*;
 
@@ -175,8 +176,49 @@ public class Mapa extends Observable{
 		this.notifyObservers();
 	}
 	public Node limitrofesToXml(Document xmlDoc) {
-		// TODO Auto-generated method stub
-		return null;
+		//creo el elemento de los limitrofes
+		Element elementoLimitrofes = xmlDoc.createElement("ArchivoLimitrofes");
+		//obtengo todas las regiones
+		Iterator itRegiones = this.getRegiones().iterator();
+		ArrayList limitrofes;
+		Region reg1;
+		Region reg2;
+		
+		while(itRegiones.hasNext()){
+			//creo el elemento que coniene los dos limitrofes
+			Element elementoRegiones = xmlDoc.createElement("limitrofes");
+			//obtengo todas las regiones
+			reg1 = (Region)itRegiones.next();
+			
+			//creo elemento para agregar la region
+			Element elementoReg1 = xmlDoc.createElement("region1");
+			Text hijoReg1 = xmlDoc.createTextNode(reg1.getNombre());
+			elementoReg1.appendChild(hijoReg1);
+			
+			
+			Iterator itLimitrofes;
+			Element elementoReg2 = null;
+			try {
+				//obtengo todas las limitros de la region
+				itLimitrofes = this.getLimitrofes(reg1).iterator();
+				while(itLimitrofes.hasNext()){
+					//obtengo cada limitrofes
+					reg2 = (Region)itLimitrofes.next();
+					//creo el elemento
+					elementoReg2 = xmlDoc.createElement("region2");
+					Text hijoReg2 = xmlDoc.createTextNode(reg2.getNombre());
+					//lo agrego al nodo
+					elementoReg2.appendChild(hijoReg2);
+				}
+			} catch (eRegionNoExistente e) {}//se que existe seguro
+			//agrego los dos elementos de las regiones
+			elementoRegiones.appendChild(elementoReg1);
+			elementoRegiones.appendChild(elementoReg2);
+			//agrego los elementos de regiones al de limitrofes
+			elementoLimitrofes.appendChild(elementoRegiones);
+		}
+		//devuelvo el elemento generado con todos los limitrofes
+		return elementoLimitrofes;
 	}
 	public Node regionesToXml(Document xmlDoc) {
 		Element elementoRegiones = xmlDoc.createElement("regiones");

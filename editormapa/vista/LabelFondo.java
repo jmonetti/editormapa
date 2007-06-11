@@ -17,6 +17,7 @@ public class LabelFondo  extends JLabel {
 	private List puntosX;
 	private List puntosY;
 	private List Poligonos;
+	private String path;
 	
 	public LabelFondo(String path, List puntosX, List puntosY, List Poligonos){
 		super();
@@ -30,6 +31,7 @@ public class LabelFondo  extends JLabel {
 		this.puntosY = puntosY;
 		this.Poligonos = Poligonos;
 		this.addMouseListener(ControladorMouseRegion.getInstance());
+		this.path = path;
 	}
 	
 	public void paint(Graphics g){
@@ -47,5 +49,8 @@ public class LabelFondo  extends JLabel {
 
 			}
 		}
+	}
+	public String getPath(){
+		return this.path;
 	}
 }
