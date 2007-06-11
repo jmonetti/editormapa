@@ -25,7 +25,7 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 
 	private final static String nombreArchivoConfig = "config.raj";
 	private final static String nombreArchivoRegiones = "Regiones.xml";
-	private final static String nombreArchivoLimitrofes = "Limitrofes";
+	private final static String nombreArchivoLimitrofes = "Limitrofes.xml";
 	private final static String nombreArchivoVista = "Regiones-vista.xml";
 	
 	public void ejecutar() {
