@@ -73,7 +73,6 @@ public class VistaPrincipal {
 		dp.setVisible(true);
 		frameAgregarRegion = new FrameAgregarRegion("Agregar región");
 		frameAgregarRegion.setVisible(false);
-		dp.add(frameAgregarRegion);
 
 		marcoPrincipal.add(dp);
 		marcoPrincipal.setVisible(true);

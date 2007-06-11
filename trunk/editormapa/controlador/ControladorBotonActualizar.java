@@ -8,11 +8,18 @@ import javax.swing.JOptionPane;
 import modelo.Mapa;
 import modelo.Region;
 
+import vista.FrameAgregarRegion;
 import vista.VistaMapa;
 import vista.VistaPrincipal;
 
-public class ControladorBotonTerminar implements ActionListener {
+public class ControladorBotonActualizar implements ActionListener {
 
+	private FrameAgregarRegion vista; //Vista que controla
+	
+	public ControladorBotonActualizar (FrameAgregarRegion vista){
+		this.vista = vista;
+	}
+	
 	public void actionPerformed(ActionEvent arg0) {
 		//obtengo las vistas
 		VistaPrincipal vistaPrincipal = VistaPrincipal.getInstance(); 
@@ -26,7 +33,7 @@ public class ControladorBotonTerminar implements ActionListener {
 			//habilito el menú edicion
 			vistaPrincipal.getVistaMenu().habilitarMenu("Edicion");
 			//creo una nueva region vacia
-			Region regionNueva = new Region("",0);
+			Region regionNueva = new Region(vista.getNombreRegion(),vista.getDineroRegion());
 			//Agrego a la vista mapa como observadora de la region y actualizo los obs
 			regionNueva.addObserver(vistaMapa);
 			regionNueva.ActualizarObservadores();

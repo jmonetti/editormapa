@@ -62,8 +62,10 @@ public class Mapa{
 	 */
 	public Region buscarRegion(Object o,Comparator c){
 		Vertice vertice =this.regiones.buscarVertice(o, c);
-		return (Region)vertice.getInfo();
-		
+		if (vertice != null)
+			return (Region)vertice.getInfo();
+		else
+			return null;
 	}
 	/**
 	 * Permite quitar una region del mapa. La busca por el id de la region

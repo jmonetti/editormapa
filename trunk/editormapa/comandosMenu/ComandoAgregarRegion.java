@@ -13,11 +13,6 @@ public class ComandoAgregarRegion extends ComandoMenu {
 		VistaPrincipal.getInstance().getVistaMapa().getLabelFondo().removeMouseListener(ControladorMouseRegion.getInstance());		
 		VistaPrincipal.getInstance().getVistaMapa().getLabelFondo().addMouseListener(ControladorFondoModoDibujo.getInstance());
 		VistaPrincipal.getInstance().getVistaMenu().desHabilitarMenu("Edicion");
-		VistaPrincipal.getInstance().getFrameAgregarRegion().setVisible(true);
 	}
 		
-		
-	
-	
-
 }

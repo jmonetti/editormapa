@@ -9,7 +9,6 @@ public class Principal {
 		Mapa.getInstance();
 		VistaPrincipal.getInstance().getVistaMapa();
 		
-
 	}
 
 }

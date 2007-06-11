@@ -4,6 +4,10 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import modelo.ComparadorIdRegionConInt;
+import modelo.Mapa;
+import modelo.Region;
+
 import vista.VistaPrincipal;
 import vista.VistaRegion;
 
@@ -28,11 +32,15 @@ public class ControladorMouseRegion implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		Point punto = new Point(arg0.getX(), arg0.getY());
 		VistaRegion vR = VistaPrincipal.getInstance().getVistaMapa().getPoligonoEn(punto);
-		if(vR != null)
-			System.out.println(vR.getId());
+		Region region = null;
+		int id = -1;
+		if (vR != null)
+			id = vR.getId();
+		region = Mapa.getInstance().buscarRegion(id, new ComparadorIdRegionConInt());
+		if (arg0.getButton() == MouseEvent.BUTTON1)
+			ControladorSeleccion.GetInstance().setSlot1(region);
 		else
-			System.out.println("No clickeaste nada huevon!");
-		
+			ControladorSeleccion.GetInstance().setSlot2(region);
 	}
 
 	public void mouseEntered(MouseEvent arg0) {

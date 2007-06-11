@@ -31,7 +31,6 @@ public class ControladorMenu implements ActionListener {
 		comandos.put("Salir", new ComandoSalir());
 		
 		comandos.put("Agregar región" , new ComandoAgregarRegion());
-		comandos.put("Terminar", new ControladorBotonTerminar());
 		comandos.put("Quitar región" , new ComandoQuitarRegion());
 		
 	}
