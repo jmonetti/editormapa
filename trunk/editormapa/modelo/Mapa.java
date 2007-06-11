@@ -3,13 +3,14 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Observable;
 
 import modelo.grafo.*;
 
 /**@author Grupo 2, Algoritmos y programación 3, Cátedra Fontela<br>1er cuat 2007
  * <br>Esta clase representa el mapa
  */
-public class Mapa{
+public class Mapa extends Observable{
 	
 	private Grafo regiones;//grafo con las regiones
 	private String nombre;
@@ -95,6 +96,7 @@ public class Mapa{
 			else
 				//si los encontro agrega una arista no dirigida entre ambas regiones
 				regiones.agregarAristaNoDirigida(vertice1, vertice2, infoArista);
+			ActualizarObservadores();
 		}catch(NullPointerException e){}
 	}
 	/**
@@ -160,5 +162,12 @@ public class Mapa{
 		cadena += "Cantidad de regiones: "+ getCantidadRegiones() + "\n";
 		cadena += this.regiones.toString();
 		return cadena;
+	}
+	/**
+	 * Actualiza los observadores
+	 */
+	public void ActualizarObservadores(){
+		this.setChanged();
+		this.notifyObservers();
 	}
 }

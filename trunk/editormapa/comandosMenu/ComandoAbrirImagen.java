@@ -5,8 +5,6 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import vista.VistaMapa;
-import vista.VistaMenu;
 import vista.VistaPrincipal;
 
 public class ComandoAbrirImagen extends ComandoMenu {
@@ -21,8 +19,6 @@ public class ComandoAbrirImagen extends ComandoMenu {
 			VistaPrincipal.getInstance().getVistaMapa().setImagen(ventanaArchivos.getSelectedFile().getPath());
 			VistaPrincipal.getInstance().getVistaMenu().habilitarMenu("Edicion");
 		}
-		
-			
 		
 	}
 	

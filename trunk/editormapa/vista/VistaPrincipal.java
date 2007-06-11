@@ -16,7 +16,8 @@ public class VistaPrincipal {
 
 	public static JFrame marcoPrincipal=null;
 	private VistaMapa mapa;
-	private FrameRegion frameRegion;
+	private FrameRegion frameRegion1;
+	private FrameRegion frameRegion2;
 	private JDesktopPane dp;
 	private static VistaPrincipal instance= null;
 	private VistaMenu menu;
@@ -42,19 +43,20 @@ public class VistaPrincipal {
 		return this.dp;
 	}
 	public FrameRegion getFrameRegion(){
-		return this.frameRegion;
+		return this.frameRegion1;
 	}
 	public FrameAgregarRegion getFrameAgregarRegion(){
 		return frameAgregarRegion;
 	}
 	private void startGUI() {
+		//Defino el tamaño de la pantalla
+		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
 		//creo el marco principal
 		marcoPrincipal = new JFrame("Editor de mapas");
 		//lo maximiso
 		marcoPrincipal.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		//le agrego sus controladores
 		marcoPrincipal.addWindowListener(new ControladorVentanaPrincipal());
-		//marcoPrincipal.addWindowFocusListener(new ControladorFocoVentanaPrincipal());
 		//creo la barra de menu
 		menu = new VistaMenu();
 		//agrego la barra al mnarco principal
@@ -63,19 +65,20 @@ public class VistaPrincipal {
 		mapa = new VistaMapa();
 		//muestro el marco
 		dp = new JDesktopPane();
-		Dimension tamañoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		dp.setSize(tamañoPantalla);
+		dp.setSize(tamanoPantalla);
 		dp.setBackground(Color.black);
 		dp.setOpaque(true);
-		frameRegion = new FrameRegion("Datos Región");
+		frameRegion1 = new FrameRegion("Datos Región Slot 1", 1, 0,(int) (2*tamanoPantalla.getHeight()/3));
+		frameRegion2 = new FrameRegion("Datos Región Slot 2", 2, tamanoPantalla.width / 3,(int) (2*tamanoPantalla.getHeight()/3));
 		dp.add(mapa);
-		dp.add(frameRegion);
-		dp.setVisible(true);
-		frameAgregarRegion = new FrameAgregarRegion("Agregar región");
-		frameAgregarRegion.setVisible(false);
+		dp.add(frameRegion1);
+		dp.add(frameRegion2);
 
 		marcoPrincipal.add(dp);
 		marcoPrincipal.setVisible(true);
+		
+		frameAgregarRegion = new FrameAgregarRegion("Agregar región");
+		frameAgregarRegion.setVisible(false);
 	}
 	public VistaMenu getVistaMenu() {
 		return menu;

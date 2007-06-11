@@ -41,6 +41,7 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		this.setVisible(true);
 		//le agrego el controlador que no permite que se mueva de su lugar
 		this.addComponentListener(new ControladorNoMover(this.getX(), this.getY()));
+		
 	}
 	/**
 	 * Agrega un punto nuevo al mapa. Un conjunto de estos permiten formar un poligono. Si el punto se encuentra fuera
@@ -119,10 +120,11 @@ public class VistaMapa extends JInternalFrame implements Observer{
 	 * @param path Ruta donde se encuentra la imagen de fondo
 	 */
 	public void setImagen(String path) {
-		
-		//creo una etiqueta para agregar la imagen de fondo
+		//borro lo anterior
 		borrarPuntos();
 		borrarPoligonos();
+		this.getContentPane().removeAll();
+		//creo una etiqueta para poner el fondo
 		labelImagen = new LabelFondo(path, puntosX, puntosY, Poligonos); 
 		panel = new JScrollPane(labelImagen);
 		this.getContentPane().add(panel);

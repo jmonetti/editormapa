@@ -62,7 +62,7 @@ public class FrameAgregarRegion extends JFrame {
 	 */
 	private void agregarBotones(JLayeredPane panel) {
 		Dimension tamanoPantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		actualizar = new JButton("Actualizar Datos");
+		actualizar = new JButton("Crear Region");
 		actualizar.setBounds(tamanoPantalla.width / 10, tamanoPantalla.height / 4, 160, 30);
 		panel.add(actualizar);
 		actualizar.addActionListener(new ControladorBotonActualizar(this));
@@ -105,7 +105,14 @@ public class FrameAgregarRegion extends JFrame {
 			this.panel.add(datos[cont]);
 		}
 	}
-	
+	/**
+	 * Vacia el contenido de las cajas de texto
+	 */
+	public void limpiarCajasDeTexto(){
+		for (int cont = 0; cont < CantidadDatos; cont++){
+			this.datos[cont].setText("");
+		}
+	}
 	/**
 	 * @return El nombre de la region, ingresado en el campo region
 	 */
