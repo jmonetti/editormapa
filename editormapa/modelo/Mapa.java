@@ -5,6 +5,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Observable;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import modelo.grafo.*;
 
 /**@author Grupo 2, Algoritmos y programación 3, Cátedra Fontela<br>1er cuat 2007
@@ -169,5 +173,16 @@ public class Mapa extends Observable{
 	public void ActualizarObservadores(){
 		this.setChanged();
 		this.notifyObservers();
+	}
+	public Node limitrofesToXml(Document xmlDoc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Node regionesToXml(Document xmlDoc) {
+		Element elementoRegiones = xmlDoc.createElement("regiones");
+		Iterator it = this.getRegiones().iterator();
+		while(it.hasNext())
+			elementoRegiones.appendChild(((Region)it.next()).toXml(xmlDoc)); 
+		return elementoRegiones;
 	}
 }
