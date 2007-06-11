@@ -17,10 +17,14 @@ public class VistaMenu  extends JMenuBar{
 		menuArchivo.setName("Archivo");
 		//Creo los sub menus
 		JMenuItem menuAbrirImagen = new JMenuItem("Abrir Imagen..");
+		JMenuItem menuGenerarArchivosJuego = new JMenuItem("Generar Archivos juego");
 		JMenuItem menuSalir = new JMenuItem("Salir");
+		
 		menuSalir.addActionListener(ControladorMenu.getInstance());
 		//los agrego al menu principal
 		menuArchivo.add(menuAbrirImagen);
+		menuArchivo.add(menuGenerarArchivosJuego);
+		menuArchivo.addSeparator();
 		menuArchivo.add(menuSalir);
 		//lo agrego a la barra
 		barra.add(menuArchivo);

@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import comandosMenu.ComandoAbrirImagen;
 import comandosMenu.ComandoAgregarRegion;
+import comandosMenu.ComandoGenerarArchivos;
 import comandosMenu.ComandoMenu;
 import comandosMenu.ComandoQuitarRegion;
 import comandosMenu.ComandoSalir;
@@ -28,6 +29,7 @@ public class ControladorMenu implements ActionListener {
 	private ControladorMenu(){
 		comandos = new HashMap();
 		comandos.put("Abrir Imagen..", new ComandoAbrirImagen());
+		comandos.put("Generar Archivos juego", new ComandoGenerarArchivos());
 		comandos.put("Salir", new ComandoSalir());
 		
 		comandos.put("Agregar región" , new ComandoAgregarRegion());
