@@ -21,6 +21,8 @@ import org.w3c.dom.Text;
 
 import controlador.ControladorNoMover;
 
+import modelo.ComparadorIdRegionConInt;
+import modelo.Mapa;
 import modelo.Region;
 
 public class VistaMapa extends JInternalFrame implements Observer{
@@ -161,14 +163,36 @@ public class VistaMapa extends JInternalFrame implements Observer{
 		else
 			return null;
 	}
+	/**
+	 * Busca una region que tenga el id pasado por parametro
+	 * @param id Id que se esta buscando
+	 * @return La vista region si la encontro, null en caso contrario
+	 */
+	public VistaRegion getPoligonoPorId(int id){
+		int i = 0;
+		boolean encontrado = false;
+		while(i<Poligonos.size() && !encontrado){
+			if( ((VistaRegion)Poligonos.get(i)).getId() == id)
+				encontrado = true;
+			else
+				i++;
+		}
+		if(encontrado)
+			return (VistaRegion)Poligonos.get(i);
+		else
+			return null;
+	}
 	public Element toXml(Document dom){
 		Element vista = dom.createElement("Vista");
 		
 		Element src = dom.createElement("Src");
-		
 		Text hijoSrc = dom.createTextNode(((LabelFondo)this.labelImagen).getPath());
-		for(int i = 0;i<Poligonos.size();i++){
-			Region reg;
+		src.appendChild(hijoSrc);
+		
+		for(int indice = 0; indice < Poligonos.size(); indice++){
+			VistaRegion vistaRegion = (VistaRegion)this.Poligonos.get(indice);
+			Region reg = Mapa.getInstance().buscarRegion(vistaRegion.getId(), new ComparadorIdRegionConInt);
+			
 		}
 	}
 }
