@@ -54,8 +54,9 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 	}
 
 	private void generarArchivoIntefaz(String ruta) {
-		
-		
+		Document xmlDoc = generarDocumentoXml();
+		xmlDoc.appendChild(VistaPrincipal.getInstance().getVistaMapa().toXml(xmlDoc));
+		imprimirAArchivo(xmlDoc, ruta);
 	}
 
 	private void generarArchivoLimitrofes(String ruta) {
