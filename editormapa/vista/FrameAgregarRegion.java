@@ -14,7 +14,6 @@ import javax.swing.border.Border;
 import javax.swing.plaf.metal.MetalBorders;
 
 import controlador.ControladorBotonActualizar;
-import controlador.ControladorFocusearSiempre;
 
 public class FrameAgregarRegion extends JFrame {
 	
@@ -26,7 +25,13 @@ public class FrameAgregarRegion extends JFrame {
 	
 	private static int CantidadDatos = 2;
 	
-	public FrameAgregarRegion(String titulo){
+	private static FrameAgregarRegion Instance = null; //Instancia unica del frame
+	
+	/**
+	 * Inicializa la instancia del frame
+	 * @param titulo Titulo de la ventana
+	 */
+	private FrameAgregarRegion(String titulo){
 		//Llamo al constructor del padre
 		super(titulo);
 		this.setResizable(false); //Hago que no pueda cambiar su tamaño
@@ -46,13 +51,28 @@ public class FrameAgregarRegion extends JFrame {
 		
 		//Creo los botones
 	    this.agregarBotones(panel);
-		//agrego el panel al frame
+		
+	    //agrego el panel al frame
 		this.getContentPane().add(panel);
+		
+		//conecto la referencia a la instancia
+		Instance = this;
 		
 		//Hago esta vista visible
 		this.setVisible(true);
 	}
 
+	/**
+	 * @return La unica instancia de esta ventana.
+	 * Si no existe la crea y la devuelve.
+	 */
+	public static FrameAgregarRegion getInstance(){
+		if (Instance == null)
+			return new FrameAgregarRegion(" Agregar Region");
+		else
+			return Instance;
+	}
+	
 	/**
 	 * Crea los botones y los agrega al panel
 	 * @param panel
