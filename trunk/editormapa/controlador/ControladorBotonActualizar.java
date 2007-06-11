@@ -34,9 +34,7 @@ public class ControladorBotonActualizar implements ActionListener {
 			vistaPrincipal.getVistaMenu().habilitarMenu("Edicion");
 			//creo una nueva region vacia
 			Region regionNueva = new Region(vista.getNombreRegion(),vista.getDineroRegion());
-			//Agrego a la vista mapa como observadora de la region y actualizo los obs
-			regionNueva.addObserver(vistaMapa);
-			regionNueva.ActualizarObservadores();
+			vistaMapa.agregarRegion(regionNueva.getId());
 			//la agrego al mapa
 			Mapa.getInstance().AgregarRegion(regionNueva);
 			//escondo la ventana de agregar
