@@ -29,10 +29,8 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 	private final static String nombreArchivoRegiones = "Regiones.xml";
 	private final static String nombreArchivoLimitrofes = "Limitrofes.xml";
 	private final static String nombreArchivoVista = "Regiones-vista.xml";
-	private String rutaArchivoConfig;
-	private String rutaArchivoLimitrofes;
-	private String rutaArchivoRegiones;
-	private String rutaArchivoInterfaz;
+	private String ruta;
+	
 	
 	public void ejecutar() {
 	
@@ -44,14 +42,11 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 			//ventanaArchivos.setAcceptAllFileFilterUsed(false);
 			int opcion = ventanaArchivos.showSaveDialog(VistaPrincipal.getInstance().getJDesktopPane());
 			if(opcion == JFileChooser.APPROVE_OPTION){
-				rutaArchivoRegiones = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator + nombreArchivoRegiones);
-				generarArchivoRegiones(rutaArchivoRegiones);
-				rutaArchivoLimitrofes = new String(ventanaArchivos.getSelectedFile().getAbsolutePath() + java.io.File.separator + nombreArchivoLimitrofes);
-				generarArchivoLimitrofes(rutaArchivoLimitrofes);
-				rutaArchivoInterfaz = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator +nombreArchivoVista);
-				generarArchivoIntefaz(rutaArchivoInterfaz);
-				rutaArchivoConfig = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator + nombreArchivoConfig);
-				generarArchivoConfiguracion(rutaArchivoConfig);
+				ruta = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator);
+				generarArchivoRegiones(ruta + nombreArchivoRegiones);
+				generarArchivoLimitrofes(ruta + nombreArchivoLimitrofes);
+				generarArchivoIntefaz(ruta + nombreArchivoVista);
+				generarArchivoConfiguracion(ruta);
 			}
 		}
 		else
@@ -67,30 +62,30 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 		
 		
 		Node rutaArchivoRegiones = xmlDoc.createElement("ArchivoRegiones");
-		Node hijoRutaRegiones = xmlDoc.createTextNode(this.rutaArchivoRegiones);
+		Node hijoRutaRegiones = xmlDoc.createTextNode(ruta + nombreArchivoRegiones);
 		rutaArchivoRegiones.appendChild(hijoRutaRegiones);
 		
 		config.appendChild(rutaArchivoRegiones);
 		
 		Node rutaArchivoLimitrofes = xmlDoc.createElement("ArchivoLimitrofes");
-		Node hijoRutaLimitrofes = xmlDoc.createTextNode(this.rutaArchivoLimitrofes);
+		Node hijoRutaLimitrofes = xmlDoc.createTextNode(ruta + nombreArchivoLimitrofes);
 		rutaArchivoLimitrofes.appendChild(hijoRutaLimitrofes);
 		
 		config.appendChild(rutaArchivoLimitrofes);
 		
 		Node rutaArchivoInterfaz = xmlDoc.createElement("ArchivoVista");
-		Node hijoRutaInterfaz = xmlDoc.createTextNode(this.rutaArchivoInterfaz);
+		Node hijoRutaInterfaz = xmlDoc.createTextNode(ruta + nombreArchivoVista);
 		rutaArchivoInterfaz.appendChild(hijoRutaInterfaz);
 		
 		config.appendChild(rutaArchivoInterfaz);
 		
 		Node rutaArchivoJugadores = xmlDoc.createElement("ArchivoJugadores");
-		Node hijoRutaJugadores = xmlDoc.createTextNode("Jugadores.xml");
+		Node hijoRutaJugadores = xmlDoc.createTextNode(ruta + "Jugadores.xml");
 		rutaArchivoJugadores.appendChild(hijoRutaJugadores);
 		
 		config.appendChild(rutaArchivoJugadores);
 		
-		imprimirAArchivo(xmlDoc, this.rutaArchivoConfig);
+		imprimirAArchivo(xmlDoc, ruta + nombreArchivoConfig);
 		
 		
 	}
