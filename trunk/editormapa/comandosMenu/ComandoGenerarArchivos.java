@@ -12,6 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
@@ -23,10 +25,14 @@ import vista.VistaPrincipal;
 
 public class ComandoGenerarArchivos extends ComandoMenu {
 
-	private final static String nombreArchivoConfig = "config.raj";
+	private final static String nombreArchivoConfig = "config.xml";
 	private final static String nombreArchivoRegiones = "Regiones.xml";
 	private final static String nombreArchivoLimitrofes = "Limitrofes.xml";
 	private final static String nombreArchivoVista = "Regiones-vista.xml";
+	private String rutaArchivoConfig;
+	private String rutaArchivoLimitrofes;
+	private String rutaArchivoRegiones;
+	private String rutaArchivoInterfaz;
 	
 	public void ejecutar() {
 	
@@ -38,10 +44,14 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 			//ventanaArchivos.setAcceptAllFileFilterUsed(false);
 			int opcion = ventanaArchivos.showSaveDialog(VistaPrincipal.getInstance().getJDesktopPane());
 			if(opcion == JFileChooser.APPROVE_OPTION){
-				generarArchivoConfiguracion(ventanaArchivos.getSelectedFile().getAbsolutePath()+ "/" + nombreArchivoConfig);
-				generarArchivoRegiones(ventanaArchivos.getSelectedFile().getAbsolutePath()+ "/" + nombreArchivoRegiones);
-				generarArchivoLimitrofes(ventanaArchivos.getSelectedFile().getAbsolutePath() + "/" + nombreArchivoLimitrofes);
-				generarArchivoIntefaz(ventanaArchivos.getSelectedFile().getAbsolutePath()+ "/" + "/" +nombreArchivoVista);
+				rutaArchivoRegiones = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator + nombreArchivoRegiones);
+				generarArchivoRegiones(rutaArchivoRegiones);
+				rutaArchivoLimitrofes = new String(ventanaArchivos.getSelectedFile().getAbsolutePath() + java.io.File.separator + nombreArchivoLimitrofes);
+				generarArchivoLimitrofes(rutaArchivoLimitrofes);
+				rutaArchivoInterfaz = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator +nombreArchivoVista);
+				generarArchivoIntefaz(rutaArchivoInterfaz);
+				rutaArchivoConfig = new String(ventanaArchivos.getSelectedFile().getAbsolutePath()+ java.io.File.separator + nombreArchivoConfig);
+				generarArchivoConfiguracion(rutaArchivoConfig);
 			}
 		}
 		else
@@ -49,6 +59,38 @@ public class ComandoGenerarArchivos extends ComandoMenu {
 	}
 
 	private void generarArchivoConfiguracion(String string) {
+		Document xmlDoc = generarDocumentoXml();
+		
+		
+		Node config = xmlDoc.createElement("ArchivoConfiguracion");
+		xmlDoc.appendChild(config);
+		
+		
+		Node rutaArchivoRegiones = xmlDoc.createElement("ArchivoRegiones");
+		Node hijoRutaRegiones = xmlDoc.createTextNode(this.rutaArchivoRegiones);
+		rutaArchivoRegiones.appendChild(hijoRutaRegiones);
+		
+		config.appendChild(rutaArchivoRegiones);
+		
+		Node rutaArchivoLimitrofes = xmlDoc.createElement("ArchivoLimitrofes");
+		Node hijoRutaLimitrofes = xmlDoc.createTextNode(this.rutaArchivoLimitrofes);
+		rutaArchivoLimitrofes.appendChild(hijoRutaLimitrofes);
+		
+		config.appendChild(rutaArchivoLimitrofes);
+		
+		Node rutaArchivoInterfaz = xmlDoc.createElement("ArchivoVista");
+		Node hijoRutaInterfaz = xmlDoc.createTextNode(this.rutaArchivoInterfaz);
+		rutaArchivoInterfaz.appendChild(hijoRutaInterfaz);
+		
+		config.appendChild(rutaArchivoInterfaz);
+		
+		Node rutaArchivoJugadores = xmlDoc.createElement("ArchivoJugadores");
+		Node hijoRutaJugadores = xmlDoc.createTextNode("Jugadores.xml");
+		rutaArchivoJugadores.appendChild(hijoRutaJugadores);
+		
+		config.appendChild(rutaArchivoJugadores);
+		
+		imprimirAArchivo(xmlDoc, this.rutaArchivoConfig);
 		
 		
 	}
