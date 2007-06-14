@@ -220,11 +220,14 @@ public class Mapa extends Observable{
 					elementoReg2.appendChild(hijoReg2);
 				}
 			} catch (eRegionNoExistente e) {}//se que existe seguro
-			//agrego los dos elementos de las regiones
-			elementoRegiones.appendChild(elementoReg1);
-			elementoRegiones.appendChild(elementoReg2);
-			//agrego los elementos de regiones al de limitrofes
-			elementoLimitrofes.appendChild(elementoRegiones);
+			//Si tiene alguna limitrofe
+			if (elementoReg2 != null){
+				//agrego los dos elementos de las regiones
+				elementoRegiones.appendChild(elementoReg1);
+				elementoRegiones.appendChild(elementoReg2);
+				//agrego los elementos de regiones al de limitrofes
+				elementoLimitrofes.appendChild(elementoRegiones);
+			}
 		}
 		//devuelvo el elemento generado con todos los limitrofes
 		return elementoLimitrofes;
